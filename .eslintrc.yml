@@ -1,0 +1,23 @@
+extends:
+  - "react-app"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:prettier/recommended"
+  - "prettier"
+plugins:
+  - "@typescript-eslint"
+parser: "@typescript-eslint/parser"
+env:
+  browser: true
+  node: true
+parserOptions:
+  sourceType: module
+rules:
+  "@typescript-eslint/explicit-function-return-type": 
+    - "warn"
+    - allowExpressions: true
+  prettier/prettier: 
+  - "error"
+  - semi: false
+    printWidth: 120
+    endOfLine: lf

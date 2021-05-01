@@ -4,6 +4,7 @@ import { Engine, Scene } from "react-babylonjs"
 import "./App.css"
 import { defaultGridHelperProps, GridHelper } from "./GridHelper"
 import { SpinningBox } from "./SpinningBox"
+import { AxesHelper, defaultAxesHelperProps } from "./AxesHelper"
 
 const App: React.VFC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.VFC = () => {
         <hemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
         <SpinningBox name="box1" position={Vector3.Zero()} color={Color3.FromHexString("#C8F4F9")} />
         <GridHelper {...defaultGridHelperProps} />
+        <AxesHelper {...defaultAxesHelperProps} />
       </Scene>
     </Engine>
   )

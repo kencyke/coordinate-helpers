@@ -1,3 +1,5 @@
+<img src="https://github.com/kencyke/coordinate-helpers/blob/main/helpers.png" width=500>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

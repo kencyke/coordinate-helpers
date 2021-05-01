@@ -1,11 +1,14 @@
-import React, { useEffect, useRef } from "react"
-import { Color3, Mesh, Nullable } from "@babylonjs/core"
+import React, { useEffect, useMemo, useRef } from "react"
+import { Color3, Mesh, Nullable, Quaternion } from "@babylonjs/core"
 import { GridMaterial } from "@babylonjs/materials"
 import { useScene } from "react-babylonjs"
 
+export const allPlaneKind = ["XY", "YZ", "ZX"] as const
+export type PlaneKind = typeof allPlaneKind[number]
+
 export type GridHelperProps = {
-  width: number
-  height: number
+  size: number
+  kind: PlaneKind
   subdivisions: number
   majorUnitFrequency: number
   minorUnitVisibility: number
@@ -16,8 +19,8 @@ export type GridHelperProps = {
 }
 
 export const defaultGridHelperProps: GridHelperProps = {
-  width: 100,
-  height: 100,
+  size: 100,
+  kind: "ZX",
   subdivisions: 100,
   majorUnitFrequency: 5,
   minorUnitVisibility: 0.5,
@@ -57,11 +60,22 @@ const GridHelper0: React.VFC<GridHelperProps> = (props) => {
     scene,
   ])
 
+  const quaternion = useMemo(() => {
+    if (props.kind === "XY") {
+      return Quaternion.FromEulerAngles(Math.PI / 2, 0, 0)
+    } else if (props.kind === "YZ") {
+      return Quaternion.FromEulerAngles(0, 0, Math.PI / 2)
+    } else {
+      return Quaternion.Zero()
+    }
+  }, [props.kind])
+
   return (
     <ground
       name="grid-helper"
-      width={props.width}
-      height={props.height}
+      width={props.size}
+      height={props.size}
+      rotationQuaternion={quaternion}
       subdivisions={props.subdivisions}
       updatable={false}
       ref={gridHelperRef}

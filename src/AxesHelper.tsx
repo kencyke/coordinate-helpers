@@ -29,7 +29,7 @@ const AxesHelper0: React.VFC<AxesHelperProps> = (props): null => {
     const y = new Vector3(o.x, o.y + props.scaling, o.z)
     const z = new Vector3(o.x, o.y, o.z + props.scaling)
 
-    MeshBuilder.CreateLines(
+    const xAxis = MeshBuilder.CreateLines(
       "x-axis",
       {
         points: [o, x],
@@ -39,7 +39,7 @@ const AxesHelper0: React.VFC<AxesHelperProps> = (props): null => {
       },
       scene
     )
-    MeshBuilder.CreateLines(
+    const yAxis = MeshBuilder.CreateLines(
       "y-axis",
       {
         points: [o, y],
@@ -49,7 +49,7 @@ const AxesHelper0: React.VFC<AxesHelperProps> = (props): null => {
       },
       scene
     )
-    MeshBuilder.CreateLines(
+    const zAxis = MeshBuilder.CreateLines(
       "z-axis",
       {
         points: [o, z],
@@ -59,6 +59,12 @@ const AxesHelper0: React.VFC<AxesHelperProps> = (props): null => {
       },
       scene
     )
+
+    return () => {
+      xAxis.dispose()
+      yAxis.dispose()
+      zAxis.dispose()
+    }
   }, [props.position, props.scaling, scene])
 
   return null
